@@ -2,6 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     childprocess (4.1.0)
+    haml (5.2.2)
+      temple (>= 0.8.0)
+      tilt
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     rack (2.2.3)
@@ -20,6 +23,7 @@ GEM
       rack (~> 2.2)
       rack-protection (= 2.1.0)
       tilt (~> 2.0)
+    temple (0.8.2)
     tilt (2.0.10)
     watir (7.1.0)
       regexp_parser (>= 1.2, < 3)
@@ -32,6 +36,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  haml (~> 5.2)
   sinatra (~> 2.1)
   watir (~> 7.1)
   watir-scroll (~> 0.4.0)

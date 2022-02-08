@@ -1,8 +1,9 @@
 require 'sinatra/base'
+require 'haml'
 
 class Server < Sinatra::Base
 
-  disable :logging
+  enable :logging
   
   get '/sinatra' do
     return 'sinatra running'

@@ -4,9 +4,12 @@ module Tests::ProjectNameHere
     # @return bool
     # @since  ?
     def self.assertAppCanLoad b
-      Fx::as(b,
-             -> (t) { t.goto 'http:localhost:4567' },
-             -> (t) { 1 < t.body.text.length })
+      Fx::pipe(b,
+               -> (t) {
+                 t.goto 'http:localhost:4567/sinatra'
+                 return t
+               },
+               -> (t) { return t.body.text.include? 'sinatra running' })
     end
 
     # @return bool

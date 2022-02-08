@@ -10,3 +10,5 @@ gem "sinatra", "~> 2.1"
 gem "zeitwerk", "~> 2.5"
 gem "watir", "~> 7.1"
 gem "watir-scroll", "~> 0.4.0"
+
+gem "haml", "~> 5.2"
