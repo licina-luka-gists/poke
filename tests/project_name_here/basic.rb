@@ -5,7 +5,7 @@ module Tests::ProjectNameHere
     # @since  ?
     def self.assertAppCanLoad b
       Fx::as(b,
-             -> (t) { t.goto 'http:localhost:8080' },
+             -> (t) { t.goto 'http:localhost:4567' },
              -> (t) { 1 < t.body.text.length })
     end
 
@@ -14,7 +14,7 @@ module Tests::ProjectNameHere
     def self._assertUserCanLogin b
       Fx::as(b,
              -> (t) {
-               (t.goto 'http:localhost:8080/login')
+               (t.goto 'http:localhost:4567/login')
              },
              -> (t) {
                if 1 > (t.elements text: 'Login').count
