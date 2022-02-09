@@ -12,3 +12,5 @@ gem "watir", "~> 7.1"
 gem "watir-scroll", "~> 0.4.0"
 
 gem "haml", "~> 5.2"
+
+gem "httparty", "~> 0.20.0"
