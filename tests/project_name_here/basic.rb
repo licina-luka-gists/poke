@@ -12,6 +12,17 @@ module Tests::ProjectNameHere
                -> (t) { return t.body.text.include? 'sinatra running' })
     end
 
+    def self.assertEngineCanProxy b
+      Fx::pipe(b,
+               -> (t) {
+                 t.goto 'http:localhost:4567/pseudo'
+                 return t
+               },
+               -> (t) {
+                 return (t.element id: 'result').text.include? 'proxied'
+               })
+    end
+    
     # @return bool
     # @since  ?
     def self._assertUserCanLogin b

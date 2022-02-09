@@ -1,5 +1,6 @@
-tests/*
+tests/*/
 !tests/.keep
 
-hamls/*
-!hamls/.keep
+views/*/
+!views/.keep
+!!views/proxied.haml
