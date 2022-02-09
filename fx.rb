@@ -42,13 +42,13 @@ class Fx
   # @since  0.12.0
   def self.perform test, b, name
     begin
-      if ! test.call b
-        raise "false"
+      if test.call b
+        Fx::log name
       end
 
-      Fx::log name
+      raise 'OK'
     rescue => e
-      Fx::notice "!#{name}: #{e.message}"
+      Fx::notice "#{name}: #{e.message}"
     end
   end
 
