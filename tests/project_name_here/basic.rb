@@ -3,23 +3,23 @@ module Tests::ProjectNameHere
     
     # @return bool
     # @since  ?
-    def self.assertAppCanLoad b
+    def self.assertAppCantLoad b
       Fx::pipe(b,
                -> (t) {
                  t.goto 'http:localhost:4567/sinatra'
                  return t
                },
-               -> (t) { return t.body.text.include? 'sinatra running' })
+               -> (t) { return !(t.body.text.include? 'sinatra running') })
     end
 
-    def self.assertEngineCanProxy b
+    def self.assertEngineCantProxy b
       Fx::pipe(b,
                -> (t) {
                  t.goto 'http:localhost:4567/pseudo'
                  return t
                },
                -> (t) {
-                 return (t.element id: 'result').text.include? 'proxied'
+                 return !((t.element id: 'result').text.include? 'proxied')
                })
     end
     

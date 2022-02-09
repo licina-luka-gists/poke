@@ -20,7 +20,7 @@ class Fx
 
   # @return void
   def self.log message, failed = false
-    on  = failed ? "\u001b[31m" : "\u001b[32m"
+    on  = !failed ? "\u001b[31m" : "\u001b[32m"
     off = "\u001b[0m"
     res = !failed ? "success" : "failure"
     puts "#{on}#{res}#{off}: #{message}"
