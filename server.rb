@@ -14,7 +14,20 @@ class Server < Sinatra::Base
   end
   
   get '/pseudo' do
-    return Client.new.get 'http://localhost:4567/proxied'
+    return Client.new.get 'http://localhost:4567/proxied',
+                          { 'Accept' => 'text/html' }
+  end
+
+  get '/api/json/masked' do
+    return '{"result":"masked"}'
+  end
+  
+  get '/page/masked' do
+    return haml :page,
+                { locals: {
+                    data: ( Client.new.get 'http://localhost:4567/api/json/masked',
+                                           { 'Accept'        => 'application/json',
+                                             'Authorization' => "Bearer #{request.cookies['token']}" }) } }
   end
 
 end

@@ -22,6 +22,17 @@ module Tests::ProjectNameHere
                  return !((t.element id: 'result').text.include? 'proxied')
                })
     end
+
+    def self.assertEngineCantMask b
+      Fx::pipe(b,
+               -> (t) {
+                 t.goto 'http:localhost:4567/page/masked'
+                 return t
+               },
+               -> (t) {
+                 return ! (t.element id: 'result').text.include?('masked')
+               })
+    end
     
     # @return bool
     # @since  ?
