@@ -19,6 +19,7 @@ class Server < Sinatra::Base
   end
 
   get '/api/json/masked' do
+    puts request.env['HTTP_AUTHORIZATION']
     return '{"result":"masked"}'
   end
   

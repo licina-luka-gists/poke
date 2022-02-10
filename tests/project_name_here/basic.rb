@@ -24,6 +24,7 @@ module Tests::ProjectNameHere
     end
 
     def self.assertEngineCantMask b
+      b.cookies.add 'token', 'abc'
       Fx::pipe(b,
                -> (t) {
                  t.goto 'http:localhost:4567/page/masked'

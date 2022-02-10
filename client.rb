@@ -4,7 +4,8 @@ require 'httparty'
 class Client
 
   def get uri, headers = { 'Accept' => 'text/html' }
-    return Fx::as((HTTParty.get uri, headers),
+    return Fx::as((HTTParty.get uri,
+                                { :headers => headers }),
                   -> (t) {
                     if headers['Accept'] == 'text/html'
                       return t.body
