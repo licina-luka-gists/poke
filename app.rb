@@ -19,7 +19,8 @@ def main argv = [], argc
                                args: [ 'start-fullscreen' ]
                              }
                            }
-    
+
+    b.timeout = 10
     b.window.resize_to 1366, 768
     
     [ Tests::ProjectNameHere::Basic ].each do |c|
