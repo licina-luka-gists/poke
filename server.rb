@@ -1,7 +1,4 @@
-require 'sinatra/base'
-require 'haml'
-
-class Server < Sinatra::Base
+class Server < Routes
 
   enable :logging
   
@@ -14,7 +11,8 @@ class Server < Sinatra::Base
   end
   
   get '/pseudo' do
-    return Client.new.get 'http://localhost:4567/proxied',
+    return Client.new.hit 'get',
+                          'http://localhost:4567/proxied',
                           { 'Accept' => 'text/html' }
   end
 
@@ -24,11 +22,21 @@ class Server < Sinatra::Base
   end
   
   get '/page/masked' do
-    return haml :page,
-                { locals: {
-                    data: ( Client.new.get 'http://localhost:4567/api/json/masked',
-                                           { 'Accept'        => 'application/json',
-                                             'Authorization' => "Bearer #{request.cookies['token']}" }) } }
+    Fx::pipe({ 'Accept'        => 'application/json',
+               'Authorization' => "Bearer #{request.cookies['token']}" },
+             -> (t) {
+               Client.new.hit 'get',
+                              'http://localhost:4567/api/json/masked',
+                              t
+             },
+             -> (t) {
+               haml :page,
+                    {
+                      locals: {
+                        data: t
+                      }
+                    }
+             })
   end
 
 end

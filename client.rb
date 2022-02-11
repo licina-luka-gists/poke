@@ -3,9 +3,22 @@ require 'httparty'
 
 class Client
 
-  def get uri, headers = { 'Accept' => 'text/html' }
-    return Fx::as((HTTParty.get uri,
-                                { :headers => headers }),
+  # @brief  an HTTP client shortcut
+  #
+  # @param  ?
+  # @param  ?
+  # @param  ?
+  # @param  ?
+  #
+  # @return mixed
+  # @since  ?
+  def hit verb,
+          uri,
+          headers = { 'Accept' => 'text/html' },
+          payload = {}
+    
+    return Fx::as((HTTParty.method(verb).call uri,
+                                              { :headers => headers }),
                   -> (t) {
                     if headers['Accept'] == 'text/html'
                       return t.body
@@ -14,9 +27,5 @@ class Client
                     return JSON.parse t.body
                   })
   end
-
-  def post uri, req
-    return false
-  end
-
+  
 end

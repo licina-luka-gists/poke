@@ -1,7 +1,7 @@
-RSpec.describe Client do
+RSpec.describe 'http client' do
 
-  it "cant" do
-    expect false
+  it "cant fail without a message" do
+    assert 2 + 2 == 5
   end
 
 end

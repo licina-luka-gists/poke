@@ -3,7 +3,7 @@ module Tests::ProjectNameHere
     
     # @return bool
     # @since  ?
-    def self.assertAppCantLoad b
+    def self.assertEngineCantLoad b
       Fx::pipe(b,
                -> (t) {
                  t.goto 'http:localhost:4567/sinatra'
@@ -37,7 +37,7 @@ module Tests::ProjectNameHere
     
     # @return bool
     # @since  ?
-    def self._assertUserCanLogin b
+    def self._assertUserCantLogin b
       Fx::as(b,
              -> (t) {
                (t.goto 'http:localhost:4567/login')
@@ -49,10 +49,10 @@ module Tests::ProjectNameHere
              },
              -> (t) {
                Fx::pipe(t.inputs.first,
-                        -> (t2) { t2.send_keys 'admin@admin.com', :tab })
+                        -> (x) { x.send_keys 'admin@admin.com', :tab })
              },
              -> (t) { (t.send_keys 'password', :enter) },
-             -> (t) { t.text.include? 'Home' })
+             -> (t) { ! (t.text.include? 'Home') })
     end
   end
 end
