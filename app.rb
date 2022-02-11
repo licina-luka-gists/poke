@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 require 'watir'
 require 'watir-scroll'
 require 'zeitwerk'
@@ -16,6 +17,11 @@ loader.setup
 #
 # @todo   let the developer provide the list of tests that are ran
 def main argv = [], argc
+
+  if argv.include? '--server'
+    Server.run!
+    return false
+  end
   
   Thread.new {
     Server.run!
