@@ -9,17 +9,19 @@ module Tests::ProjectNameHere
                  t.goto 'http:localhost:4567/sinatra'
                  return t
                },
-               -> (t) { return !(t.body.text.include? 'sinatra running') })
+               -> (t) {
+                 !(t.body.text.include? 'sinatra running')
+               })
     end
 
     def self.assertEngineCantProxy b
       Fx::pipe(b,
                -> (t) {
                  t.goto 'http:localhost:4567/pseudo'
-                 return t
+                 t
                },
                -> (t) {
-                 return !((t.element id: 'result').text.include? 'proxied')
+                 !((t.element id: 'result').text.include? 'proxied')
                })
     end
 
@@ -28,10 +30,31 @@ module Tests::ProjectNameHere
       Fx::pipe(b,
                -> (t) {
                  t.goto 'http:localhost:4567/page/masked'
+                 t
+               },
+               -> (t) {
+                 !(t.element id: 'result').text.include?('masked')
+               })
+    end
+
+    def self.assertEngineCantUpload b
+      Fx::pipe(b,
+               -> (t) {
+                 t.goto 'http:localhost:4567/upload'
                  return t
                },
                -> (t) {
-                 return ! (t.element id: 'result').text.include?('masked')
+                 (t.file_field name: 'data').set __dir__.concat('/example.txt')
+                 (t.element type: 'submit').click
+                 return t
+               },
+               -> (t) {
+                 t.goto 'http:localhost:4567/uploads'
+                 return t
+               },
+               -> (t) {
+                 puts t.body.html
+                 !(t.element tag_name: 'li', text: 'upload.tmp')
                })
     end
     
