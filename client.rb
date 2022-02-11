@@ -19,7 +19,8 @@ class Client
 
     begin
       return Fx::as((HTTParty.method(verb).call uri,
-                                                { :headers => headers }),
+                                                { :headers => headers,
+                                                  :body    => payload }),
                     -> (t) {
                       if headers['Accept'] == 'text/html'
                         return t.body
@@ -28,7 +29,8 @@ class Client
                       return JSON.parse t.body
                     })
     rescue => e
-      return e.message
+      puts e.message
+      return nil
     end
   end
   
