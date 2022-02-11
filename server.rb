@@ -1,6 +1,7 @@
 class Server < Routes
 
   enable :logging
+  disable :show_exceptions
   
   get '/sinatra' do
     return 'sinatra running'
