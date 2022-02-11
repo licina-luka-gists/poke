@@ -1,5 +1,6 @@
 tests/*/
 !tests/.keep
+!tests/project_name_here/
 
 views/*/
 !views/.keep
