@@ -49,12 +49,12 @@ class Server < Routes
   post '/upload' do
     puts params
     FileUtils.copy(params[:data][:tempfile],
-                   "#{__dir__}/upload.tmp")
+                   "#{Dir.pwd}/upload.tmp")
     return 'OK'
   end
 
   get '/uploads' do
-    Fx::pipe(__dir__.concat('/upload.*'),
+    Fx::pipe(Dir.pwd.concat('/upload.*'),
              -> (t) { Dir.glob(t) },
              -> (t) {
                t.each { |f| File.delete f }

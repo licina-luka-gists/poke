@@ -4,7 +4,7 @@ require 'haml'
 class Routes < Sinatra::Base
 
   set :views, Proc.new{
-    File.join root, '/../', 'pokes', 'views'
+    File.join Dir.pwd, 'pokes', 'views'
   }
   
   get 'custom/routes' do
