@@ -1,4 +1,4 @@
-module Tests::ProjectNameHere
+module Tests
   class Basic
     
     # @return bool

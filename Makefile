@@ -1,6 +1,6 @@
 #!make
 
 test:
-	ruby app.rb
+	bin/poke
 test-visible:
-	ruby app.rb visible
+	bin/poke visible

@@ -18,7 +18,7 @@ class Server < Routes
                           'http://localhost:4567/proxied',
                           { 'Accept' => 'text/html' }
   end
-
+  
   get '/api/json/masked' do
     puts request.env['HTTP_AUTHORIZATION']
     return '{"result":"masked"}'
@@ -41,7 +41,7 @@ class Server < Routes
                     }
              })
   end
-
+  
   get '/upload' do
     haml :upload
   end
@@ -59,11 +59,10 @@ class Server < Routes
              -> (t) {
                t.each { |f| File.delete f }
                haml :uploads, {
-                 locals: {
-                   data: t
-                 }
-               }
+                      locals: {
+                        data: t
+                      }
+                    }
              })
-  end
-  
+  end  
 end
